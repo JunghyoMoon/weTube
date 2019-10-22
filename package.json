@@ -4,11 +4,21 @@
   "description": "practice coding by cloning youtube with vanila js and else",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon --exec babel-node app.js --delay 2"
   },
   "author": "Moon Jung-hyo",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "@babel/preset-env": "^7.6.3",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "helmet": "^3.21.2",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
   }
 }
