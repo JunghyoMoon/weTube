@@ -1,20 +1,7 @@
-import express from "express";
-import morgan from "morgan";
-import helmet from "helmet";
-import cookieParser from "cookie-parser";
-import bodyParser from "body-parser";
-const app = express();
+import app from "./app";
 
-const handleHome = (req, res) => res.send("Hello from home");
+const PORT = 4000;
 
-const handleProfile = (req, res) => res.send("You are in profile page");
+const handleListening = () => console.log(`😎Listening on port ${PORT}!!`);
 
-app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan("dev"));
-app.use(helmet());
-
-app.get("/profile", handleProfile);
-
-app.get("/", handleHome);
+app.listen(PORT, handleListening);

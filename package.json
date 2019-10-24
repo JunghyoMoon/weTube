@@ -4,7 +4,7 @@
   "description": "practice coding by cloning youtube with vanila js and else",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon --exec babel-node app.js --delay 2"
+    "start": "nodemon --exec babel-node init.js --delay 2"
   },
   "author": "Moon Jung-hyo",
   "license": "ISC",
