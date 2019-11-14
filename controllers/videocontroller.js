@@ -8,8 +8,8 @@ export const search = (req, res) => {
 export const upload = (req, res) =>
   res.render("upload", { pageTitle: "Upload" });
 export const videoDetail = (req, res) =>
-  res.render("video detail", { pageTitle: "Video Detail" });
+  res.render("videoDetail", { pageTitle: "Video Detail" });
 export const editVideo = (req, res) =>
-  res.render("edit video", { pageTitle: "Edit Video" });
+  res.render("editVideo", { pageTitle: "Edit Video" });
 export const deleteVideo = (req, res) =>
-  res.render("delete video", { pageTitle: "Delete Video" });
+  res.render("deleteVideo", { pageTitle: "Delete Video" });
