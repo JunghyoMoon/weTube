@@ -2,9 +2,13 @@ import routes from "../routes";
 import Video from "../models/Video";
 
 export const home = async (req, res) => {
-  const videos = await Video.find({});
-  console.log(videos);
-  res.render("home", { pageTitle: "Home", videos });
+  try {
+    const videos = await Video.find({});
+    res.render("home", { pageTitle: "Home", videos });
+  } catch (error) {
+    console.log(error);
+    res.render("home", { pageTitle: "Home", videos: [] }); //에러가 날 경우 videos는 빈 배열로 출력됨
+  }
 };
 
 export const search = (req, res) => {
@@ -17,12 +21,17 @@ export const search = (req, res) => {
 export const getUpload = (req, res) => {
   res.render("upload", { pageTitle: "Upload" });
 };
-export const postUpload = (req, res) => {
+export const postUpload = async (req, res) => {
   const {
-    body: { file, title, description }
+    body: { title, description },
+    file: { path }
   } = req;
-  // To do: 비디오 업로드와 세이브 기능 구현
-  res.redirect(routes.videoDetail(300132)); // id를 받게 수정할 것
+  const newVideo = await Video.create({
+    fileUrl: path,
+    title,
+    description
+  });
+  res.redirect(routes.videoDetail(newVideo._id));
 };
 
 export const videoDetail = (req, res) =>
