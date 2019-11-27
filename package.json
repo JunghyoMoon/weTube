@@ -4,7 +4,9 @@
   "description": "practice coding by cloning youtube with vanila js and else",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon --exec babel-node init.js --delay 2"
+    "dev:server": "nodemon --exec babel-node init.js --delay 2",
+    "dev:assets": "WEBPACK_ENV=development webpack",
+    "build:assets": "WEBPACK_ENV=production webpack"
   },
   "author": "Moon Jung-hyo",
   "license": "ISC",
@@ -16,11 +18,14 @@
     "cookie-parser": "^1.4.4",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "helmet": "^3.21.2",
     "mongoose": "^5.7.12",
     "morgan": "^1.9.1",
     "multer": "^1.4.2",
-    "pug": "^2.0.4"
+    "pug": "^2.0.4",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   },
   "devDependencies": {
     "eslint": "^6.7.1",
