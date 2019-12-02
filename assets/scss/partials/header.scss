@@ -10,6 +10,16 @@
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
     .header__column {
+      a {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .siteName {
+          color: white;
+          font-size: 25px;
+          font-weight: 600;
+        }
+      }
       i {
         color: white;
         font-size: 35px;
@@ -39,6 +49,7 @@
           font-size: 14px;
           color: $black;
           font-weight: 600;
+          max-width: none;
           &::placeholder {
             font-weight: 300;
             color: rgba(0, 0, 0, 0.7);
