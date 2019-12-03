@@ -1,9 +1,12 @@
+import dotenv from "dotenv";
 import "./db";
+
+// Mongoose Models
 import "./models/Video";
 import "./models/Comment";
+import "./models/User";
 
 import app from "./app";
-import dotenv from "dotenv";
 
 dotenv.config();
 
