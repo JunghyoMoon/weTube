@@ -2,6 +2,7 @@ import passport from "passport";
 import routes from "../routes";
 import User from "../models/User";
 
+// Local Join
 export const getJoin = (req, res) => {
   res.render("join", { pageTitle: "Join" });
 };
@@ -28,6 +29,7 @@ export const postJoin = async (req, res, next) => {
   }
 };
 
+// Local Login
 export const getLogin = (req, res) => {
   res.render("login", { pageTitle: "Login" });
 };
@@ -38,7 +40,6 @@ export const postLogin = passport.authenticate("local", {
 });
 
 // Github Login
-
 export const githubLogin = passport.authenticate("github");
 
 export const githubLoginCallback = async (_, __, profile, cb) => {
@@ -65,19 +66,17 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
   }
 };
 
-export const postGithubLogIn = (req, res) => {
-  res.redirect(routes.home);
-};
-
 // Google Login
-
-export const googleLogin = passport.authenticate("google");
+export const googleLogin = passport.authenticate("google", {
+  scope: ["https://www.googleapis.com/auth/plus.login"]
+});
 
 export const googleLoginCallback = (accessToken, refreshToken, profile, cb) => {
-  console.log(accessToken, refreshToken, profile, cb);
+  console.log(profile, cb);
 };
 
-export const postGoogleLogIn = (req, res) => {
+// Google/Github Login Callback
+export const postSocialLogIn = (req, res) => {
   res.redirect(routes.home);
 };
 

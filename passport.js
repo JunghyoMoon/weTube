@@ -1,6 +1,6 @@
 import passport from "passport";
 import GithubStrategy from "passport-github";
-import GoogleStrategy from "passport-google-oauth";
+import GoogleStrategy from "passport-google-oauth2";
 import User from "./models/User";
 import routes from "./routes";
 import {
