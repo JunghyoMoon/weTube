@@ -10,7 +10,8 @@ import {
   postLogin,
   githubLogin,
   googleLogin,
-  postSocialLogIn
+  postSocialLogIn,
+  getMe
 } from "../controllers/userController";
 import { onlyPublic, onlyPrivate } from "../middlewares";
 
@@ -39,5 +40,6 @@ globalRouter.get(
 globalRouter.get(routes.home, home);
 globalRouter.get(routes.logout, onlyPrivate, logout);
 globalRouter.get(routes.search, search);
+globalRouter.get(routes.me, getMe);
 
 export default globalRouter;

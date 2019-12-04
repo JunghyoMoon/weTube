@@ -43,9 +43,8 @@ export const postLogin = passport.authenticate("local", {
 export const githubLogin = passport.authenticate("github");
 
 export const githubLoginCallback = async (_, __, profile, cb) => {
-  console.log(cb);
   const {
-    _json: { id, email, name, avatar_url }
+    _json: { id, email, name, avatar_url: avatarUrl }
   } = profile;
   try {
     const user = await User.findOne({ email });
@@ -58,7 +57,7 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
       email,
       name,
       githubId: id,
-      avatarUrl: avatar_url
+      avatarUrl
     });
     return cb(null, newUser);
   } catch (error) {
@@ -66,7 +65,8 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
   }
 };
 
-// Google Login
+// Google Login.......but they don't provide 'email'..
+// should find other ways
 export const googleLogin = passport.authenticate("google", {
   scope: ["https://www.googleapis.com/auth/plus.login"]
 });
@@ -84,8 +84,23 @@ export const logout = (req, res) => {
   req.logout();
   res.redirect(routes.home);
 };
-export const userDetail = (req, res) =>
-  res.render("userDetail", { pageTitle: "User Detail" });
+
+export const getMe = (req, res) => {
+  res.render("userDetail", { pageTitle: "User Detail", user: req.user });
+};
+
+export const userDetail = async (req, res) => {
+  const {
+    params: { id }
+  } = req;
+  try {
+    const user = await User.findById(id);
+    res.render("userDetail", { pageTitle: "User Detail", user });
+  } catch (error) {
+    console.log(error);
+    res.redirect(routes.home);
+  }
+};
 export const editProfile = (req, res) =>
   res.render("editProfile", { pageTitle: "Edit Profile" });
 export const changePassword = (req, res) =>
