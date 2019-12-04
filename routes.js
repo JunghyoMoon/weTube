@@ -28,6 +28,9 @@ const GITHUB_CALLBACK = "/auth/github/callback";
 
 // Google
 
+const GOOGLE = "/auth/google";
+const GOOGLE_CALLBACK = "/auth/google/callback";
+
 const routes = {
   home: HOME,
   join: JOIN,
@@ -64,7 +67,9 @@ const routes = {
     return DELETE_VIDEO;
   },
   github: GITHUB,
-  githubCallback: GITHUB_CALLBACK
+  githubCallback: GITHUB_CALLBACK,
+  google: GOOGLE,
+  googleCallback: GOOGLE_CALLBACK
 };
 
 export default routes;
