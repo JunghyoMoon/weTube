@@ -3,7 +3,7 @@
 cloning youtube with vaniliaJS
 
 ## Pages :
-
+   
     - [x] Home
     - [x] Join
     - [x] Login
