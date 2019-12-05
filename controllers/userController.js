@@ -65,14 +65,35 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
   }
 };
 
-// Google Login.......but they don't provide 'email'..
-// should find other ways
+// Google Login
 export const googleLogin = passport.authenticate("google", {
-  scope: ["https://www.googleapis.com/auth/plus.login"]
+  scope: [
+    "https://www.googleapis.com/auth/plus.login",
+    "https://www.googleapis.com/auth/userinfo.email"
+  ]
 });
 
-export const googleLoginCallback = (accessToken, refreshToken, profile, cb) => {
-  console.log(profile, cb);
+export const googleLoginCallback = async (_, __, profile, cb) => {
+  const {
+    _json: { sub: id, name, email, picture: avatarUrl }
+  } = profile;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      user.googleId = id;
+      user.save();
+      return cb(null, user);
+    }
+    const newUser = await User.create({
+      email,
+      name,
+      googleId: id,
+      avatarUrl
+    });
+    return cb(null, newUser);
+  } catch (error) {
+    cb(error);
+  }
 };
 
 // Google/Github Login Callback
