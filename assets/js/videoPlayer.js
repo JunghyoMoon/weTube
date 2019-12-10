@@ -5,6 +5,8 @@ const volumeBtn = document.getElementById("jsVolumeBtn");
 const fullScreenBtn = document.getElementById("jsFullScreen");
 const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
+const volumeRange = document.getElementById("jsVolume");
+const volumeController = document.getElementById("jsVolumeBox");
 
 const handlePlayClick = () => {
   if (videoPlayer.paused) {
@@ -16,14 +18,43 @@ const handlePlayClick = () => {
   }
 };
 
+const handleEnd = () => {
+  playBtn.innerHTML = '<i class="fas fa-play"></i>';
+  videoPlayer.currentTime = 0;
+};
+
 const handleVolumeClick = () => {
   if (videoPlayer.muted) {
     videoPlayer.muted = false;
     volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+    volumeRange.value = videoPlayer.volume;
   } else {
+    volumeRange.value = 0;
     videoPlayer.muted = true;
     volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
   }
+};
+
+const handleDrag = event => {
+  const {
+    target: { value }
+  } = event;
+  videoPlayer.volume = value;
+  if (value >= 0.6) {
+    volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+  } else if (value >= 0.2) {
+    volumeBtn.innerHTML = '<i class="fas fa-volume-down"></i>';
+  } else {
+    volumeBtn.innerHTML = '<i class="fas fa-volume-off"></i>';
+  }
+};
+
+const handleMouseOver = () => {
+  volumeRange.style.opacity = 1;
+};
+
+const handleMouseOut = () => {
+  volumeRange.style.opacity = 0;
 };
 
 const exitFullScreen = () => {
@@ -84,10 +115,15 @@ const setTotalTime = () => {
 };
 
 const init = () => {
+  videoPlayer.volume = 0.5;
   playBtn.addEventListener("click", handlePlayClick);
   volumeBtn.addEventListener("click", handleVolumeClick);
   fullScreenBtn.addEventListener("click", goFullScreen);
   videoPlayer.addEventListener("loadedmetadata", setTotalTime);
+  videoPlayer.addEventListener("ended", handleEnd);
+  volumeRange.addEventListener("input", handleDrag);
+  volumeController.addEventListener("mouseover", handleMouseOver);
+  volumeController.addEventListener("mouseout", handleMouseOut);
 };
 
 if (videoContainer) {
