@@ -15,7 +15,8 @@ module.exports = {
   },
   rules: {
     "no-console": "off",
-    "spaced-comment": "off"
+    "spaced-comment": "off",
+    "no-use-before-defind": "off"
   },
   env: {
     browser: true
