@@ -1,5 +1,5 @@
 const videoContainer = document.getElementById("jsVideoPlayer");
-const videoPlayer = videoContainer.querySelector("#jsVideoPlayer video");
+const videoPlayer = document.querySelector("#jsVideoPlayer video");
 const playBtn = document.getElementById("jsPlayBtn");
 const volumeBtn = document.getElementById("jsVolumeBtn");
 const fullScreenBtn = document.getElementById("jsFullScreen");
