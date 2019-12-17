@@ -163,7 +163,7 @@ export const deleteComment = async (req, res) => {
     if (comment.creator !== req.user.id) {
       throw Error();
     } else {
-      await Comment.findOneAndRemove({ _id: id });
+      await Comment.findOneAndRemove({ _id: commentId });
     }
   } catch (error) {
     res.status(400);

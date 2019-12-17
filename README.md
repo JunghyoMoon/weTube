@@ -2,15 +2,15 @@
 
 cloning youtube with vaniliaJS
 
-## Pages :
+## 주요 기능 :
+ - 비디오 업로드 및 제목, 설명 편집 가능
+ - 유저 인증과 프로필 에디팅
+ - 비디오에 댓글 추가 가능
+ - 비디오 검색 가능
+
+## 미구현 :
+ - 댓글의 삭제 기능 필요(작업중)
+ - 추천 비디오 리스트 등
+
+
    
-    - [x] Home
-    - [x] Join
-    - [x] Login
-    - [x] Search
-    - [x] User Detail
-    - [x] Edit Profile
-    - [x] Change Password
-    - [x] Upload
-    - [x] Video Detail
-    - [x] Edit Video
