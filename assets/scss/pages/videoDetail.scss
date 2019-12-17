@@ -58,6 +58,15 @@
         &:not(:last-child) {
           margin-bottom: 15px;
         }
+        span {
+          align-items: center;
+        }
+        #jsDeleteComment {
+          cursor: pointer;
+        }
+        p {
+          display: none;
+        }
       }
     }
   }

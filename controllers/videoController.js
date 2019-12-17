@@ -1,5 +1,6 @@
 import routes from "../routes";
 import Video from "../models/Video";
+import User from "../models/User";
 import Comment from "../models/Comment";
 
 export const home = async (req, res) => {
@@ -132,12 +133,38 @@ export const postAddComment = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id);
+    const creator = await User.findById(user.id);
     const newComment = await Comment.create({
       text: comment,
       creator: user.id
     });
     video.comments.push(newComment.id);
     video.save();
+    creator.comments.push(newComment.id);
+    creator.save();
+  } catch (error) {
+    res.status(400);
+  } finally {
+    res.end();
+  }
+};
+
+// User와 Video의 배열에서도 제거되어야 함
+// Comment 에서만 삭제됨
+
+export const deleteComment = async (req, res) => {
+  const {
+    params: { id },
+    body: { commentId },
+    user
+  } = req;
+  try {
+    const comment = await Comment.findById(id);
+    if (comment.creator !== req.user.id) {
+      throw Error();
+    } else {
+      await Comment.findOneAndRemove({ _id: id });
+    }
   } catch (error) {
     res.status(400);
   } finally {
