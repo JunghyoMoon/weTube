@@ -27,11 +27,13 @@ const deleteComment = async event => {
   });
   if (response.status === 200) {
     removeCommentBlock(comment);
+  } else {
+    console.log(response);
   }
 };
 
 const init = () => {
-  Array.from(deleteBtnArray).forEach(currentComment => {
+  deleteBtnArray.forEach(currentComment => {
     currentComment.addEventListener("click", deleteComment);
   });
 };
